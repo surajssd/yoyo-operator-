@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: yoyo-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: yoyo-operator
+  template:
+    metadata:
+      labels:
+        name: yoyo-operator
+    spec:
+      containers:
+        - name: yoyo-operator
+          image: docker.io/surajd/yoyo-operator:0.4.0
+          ports:
+          - containerPort: 60000
+            name: metrics
+          command:
+          - yoyo-operator
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: OPERATOR_NAME
+              value: "yoyo-operator"

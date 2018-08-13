@@ -22,8 +22,8 @@ type Yoyo struct {
 }
 
 type YoyoSpec struct {
-	// Fill me
+	YoyoDemo bool `json:",yoyoDemo"`
 }
 type YoyoStatus struct {
-	// Fill me
+	Status string `json:",status"`
 }
